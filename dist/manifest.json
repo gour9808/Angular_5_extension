@@ -1,7 +1,7 @@
 	
 {
     "manifest_version": 2,
-    "name": "ng2 Wxtension",
+    "name": "Angular 5 extension",
     "description": "Sync with Couchbase in a Google Chrome extension",
     "version": "1.0",
     "browser_action": {
