@@ -5,6 +5,8 @@ import { ContainerComponent } from './container/container.component';
 import { EventsComponent } from './events/events.component';
 import { DiscussionsComponent } from './discussions/discussions.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DataLoaderComponent } from './data-loader/data-loader.component';
+import { OAuthGuard } from './services/oauth-guard.service';
 
 export const eventRoutes: Routes = [
     { path: 'all', component: EventsComponent },
@@ -22,7 +24,9 @@ export const dashboardRoutes: Routes = [
 ];
 
 export const appRoutes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+    { path: '', redirectTo: 'load', pathMatch: 'full' },
+    {path: 'load', component: DataLoaderComponent, canActivate:[OAuthGuard]},
     { path: 'home', component: ContainerComponent, loadChildren: 'app/dashboard/dashboard.module#DashboardModule' }
 
 ];

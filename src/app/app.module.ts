@@ -23,6 +23,7 @@ import { AuthService } from './services/auth.service';
 import { SplashLoaderComponent } from './spalsh-loader/spalsh-loader.component';
 import { CommunicatorService } from './services/communicator.service';
 import { DataLoaderComponent } from './data-loader/data-loader.component';
+import { OAuthGuard } from './services/oauth-guard.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { DataLoaderComponent } from './data-loader/data-loader.component';
   ],
   providers: [
     ToastMessageService,
+    OAuthGuard,
     SlimLoadingBarService,
     ToolbarTitleService,
     CookieService,

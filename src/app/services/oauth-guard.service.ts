@@ -11,7 +11,7 @@ export class OAuthGuard implements CanActivate {
         if (this.auth.isAuthenticated()) {
             return this.auth.isAuthenticated();
         } else {
-            this.router.navigate(['/auth']);
+            this.router.navigate(['/home']);
         }
     }
 }
