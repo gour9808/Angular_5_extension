@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { BooksService } from './services/books.service';
 import { ListItemComponent } from './list-item/list-item.component';
+import { ToastMessageService } from './services/toast-message.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { ListItemComponent } from './list-item/list-item.component';
     HttpClientModule,
 
   ],
-  providers: [
+  providers: [ToastMessageService,
     BooksService],
 
   bootstrap: [AppComponent]
