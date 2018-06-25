@@ -12,7 +12,7 @@ import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 @AutoUnsubscribe()
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  country: any = [];
+  country$: any = [];
   loading: boolean;
 
   constructor(private router: Router, private books: BooksService) {
@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.books.getBooks().subscribe(res => {
       console.log(res);
       this.loading = false;
-      this.country = res;
+      this.country$ = res;
 
     })
   }
