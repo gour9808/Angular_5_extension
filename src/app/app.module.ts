@@ -2,7 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ToastyModule } from 'ng2-toasty';
 import { SlimLoadingBarModule, SlimLoadingBarService } from 'ng2-slim-loading-bar';
@@ -12,7 +12,6 @@ import { AppRoutingModule } from './app.routes';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ContainerComponent } from './container/container.component';
-import { ChartModule } from 'primeng/primeng';
 import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { BooksService } from './services/books.service';
@@ -22,6 +21,8 @@ import { ToolbarTitleService } from './services/toolbar-title.service';
 import { CookieService } from './services/cookie.service';
 import { AuthService } from './services/auth.service';
 import { SplashLoaderComponent } from './spalsh-loader/spalsh-loader.component';
+import { CommunicatorService } from './services/communicator.service';
+import { DataLoaderComponent } from './data-loader/data-loader.component';
 
 @NgModule({
   declarations: [
@@ -31,13 +32,14 @@ import { SplashLoaderComponent } from './spalsh-loader/spalsh-loader.component';
     ContainerComponent,
     ListItemComponent,
     SplashLoaderComponent,
+    DataLoaderComponent,
   ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpModule, ChartModule,
+    HttpModule,
     DataTableModule,
     SharedModule, TableModule,
     FlexLayoutModule,
@@ -51,6 +53,7 @@ import { SplashLoaderComponent } from './spalsh-loader/spalsh-loader.component';
     SlimLoadingBarService,
     ToolbarTitleService,
     CookieService,
+    CommunicatorService,
     AuthService,
     BooksService],
 

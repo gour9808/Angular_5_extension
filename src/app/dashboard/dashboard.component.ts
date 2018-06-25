@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { BooksService } from '../services/books.service';
+import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+@AutoUnsubscribe()
+export class DashboardComponent implements OnInit, OnDestroy {
 
   country: any = [];
   loading: boolean;
@@ -19,6 +21,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getBooks();
 
+  }
+
+  ngOnDestroy()
+  {
   }
 
   getBooks() {
