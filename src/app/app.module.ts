@@ -24,6 +24,7 @@ import { SplashLoaderComponent } from './spalsh-loader/spalsh-loader.component';
 import { CommunicatorService } from './services/communicator.service';
 import { DataLoaderComponent } from './data-loader/data-loader.component';
 import { OAuthGuard } from './services/oauth-guard.service';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { OAuthGuard } from './services/oauth-guard.service';
     ListItemComponent,
     SplashLoaderComponent,
     DataLoaderComponent,
+    CallbackComponent,
   ],
   imports: [
     BrowserAnimationsModule,

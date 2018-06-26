@@ -17,11 +17,13 @@ export class DataLoaderComponent implements OnInit, OnDestroy {
   @Cache({ pool: 'User' }) userInfo: any;
   comms$: any;
   constructor(private msgService: ToastMessageService, private router: Router, private comms: CommunicatorService) {
+   
+    console.log('Init Data Loader');
     this.fetchSession();
   }
 
   ngOnInit() {
-    console.log('Init Data Loader');
+   
   }
 
   ngOnDestroy() {
