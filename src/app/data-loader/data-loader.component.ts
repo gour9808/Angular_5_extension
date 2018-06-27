@@ -32,6 +32,8 @@ export class DataLoaderComponent implements OnInit, OnDestroy {
 
   fetchSession() {
 
+    this.router.navigate(['/home'])
+
   }
 
 }

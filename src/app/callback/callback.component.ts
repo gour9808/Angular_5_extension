@@ -19,7 +19,7 @@ export class CallbackComponent implements OnInit {
     }
 
     ngOnInit() {
-        const str = this.getHashParameter(location.hash).access_token;
+        const str = this.getCookies1();
         console.log('Access token is', str);
         if (str != null && str !== undefined) {
             this.userSession = {
@@ -27,20 +27,19 @@ export class CallbackComponent implements OnInit {
             };
             this.router.navigate(['/load']);
         } else {
-            this.router.navigate(['/auth']);
+            this.router.navigate(['/auth/callback']);
         }
     }
 
-    getHashParameter(string): any {
-        if (string) {
-            const vars = string.substring(1).split('&');
-            let key = {};
-            _.forEach(vars, str => {
-                const keys = str.split('=');
-                key[keys[0]] = keys[1];
-            });
-            return key;
-        }
-        return null;
+    getCookies1() {
+        chrome.cookies.get({ url: 'https://www.google.com', name: 'SSID' },
+        function (cookie) {
+          if (cookie) {
+            console.log(cookie.value);
+          }
+          else {
+            console.log('Can\'t get cookie! Check the name!');
+          }
+      });
     }
 }

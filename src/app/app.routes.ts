@@ -25,9 +25,9 @@ export const dashboardRoutes: Routes = [
 ];
 
 export const appRoutes: Routes = [
-   // {path: '**', redirectTo: 'load', pathMatch: 'full'},
-    { path: '', redirectTo: 'load', pathMatch: 'full' },
-    //{path: 'auth/callback', component: CallbackComponent},
+   // {path: '**', redirectTo: 'auth', pathMatch: 'full'},
+    { path: '', redirectTo: 'auth/callback', pathMatch: 'full' },
+    {path: 'auth/callback', component: CallbackComponent},
     {path: 'load', component: DataLoaderComponent, canActivate:[OAuthGuard]},
     { path: 'home', component: ContainerComponent, loadChildren: 'app/dashboard/dashboard.module#DashboardModule' }
 
