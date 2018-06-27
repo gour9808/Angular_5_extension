@@ -20,12 +20,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getBooks();
-
   }
 
-  ngOnDestroy()
-  {
-  }
+  ngOnDestroy() { }
 
   getBooks() {
     this.loading = true;
