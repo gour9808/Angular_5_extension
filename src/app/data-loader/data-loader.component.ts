@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Cache } from '../utils/storage.provider';
 import { ToastMessageService } from '../services/toast-message.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommunicatorService } from '../services/communicator.service';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 
@@ -10,29 +10,32 @@ import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
   templateUrl: './data-loader.component.html',
   styleUrls: ['./data-loader.component.scss']
 })
-@AutoUnsubscribe()
-export class DataLoaderComponent implements OnInit, OnDestroy {
+export class DataLoaderComponent implements OnInit {
 
   times = [{ odd: true }, { odd: false }, { odd: true }, { odd: false }];
-  @Cache({ pool: 'User' }) userInfo: any;
+  @Cache({ pool: 'Session' }) userSession: any;
   comms$: any;
-  constructor(private msgService: ToastMessageService, private router: Router, private comms: CommunicatorService) {
-   
+  constructor(private msgService: ToastMessageService, private current: ActivatedRoute, private router: Router, private comms: CommunicatorService) {
+
     console.log('Init Data Loader');
+    console.log("token is on data loader", this.userSession.token);
+
     this.fetchSession();
+
   }
 
   ngOnInit() {
-   
-  }
 
-  ngOnDestroy() {
-    console.log('On Destroy called');
   }
-
   fetchSession() {
-
-    this.router.navigate(['/home'])
+    console.log('go to route');
+    if (this.userSession.token) {
+      console.log(this.current);
+      this.router.navigate(['/home'])
+    }
+    else{
+      this.router.navigate(['/auth/callback'])
+    }
 
   }
 

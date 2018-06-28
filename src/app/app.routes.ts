@@ -18,15 +18,15 @@ export const discussionsRoutes: Routes = [
 ]
 
 export const dashboardRoutes: Routes = [
-    { path: '', redirectTo: 'my', pathMatch: 'full' },
+    { path: '', redirectTo: 'my' },
     { path: 'my', component: DashboardComponent },
     { path: 'events', loadChildren: 'app/events/events.module#EventsModule' },
     { path: 'discussions', loadChildren: 'app/discussions/discussion.module#DisscussionsModule' }
 ];
 
 export const appRoutes: Routes = [
-   // {path: '**', redirectTo: 'auth', pathMatch: 'full'},
-    { path: '', redirectTo: 'auth/callback', pathMatch: 'full' },
+    {path: '**', redirectTo: 'load', pathMatch: 'full'},
+    { path: '', redirectTo: 'load', pathMatch: 'full' },
     {path: 'auth/callback', component: CallbackComponent},
     {path: 'load', component: DataLoaderComponent, canActivate:[OAuthGuard]},
     { path: 'home', component: ContainerComponent, loadChildren: 'app/dashboard/dashboard.module#DashboardModule' }

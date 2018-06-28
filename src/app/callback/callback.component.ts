@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-import {Cache} from '../utils/storage.provider';
+import { Cache } from '../utils/storage.provider';
 import * as _ from 'lodash';
 import { AuthService } from '../services/auth.service';
 
@@ -13,33 +13,38 @@ import { AuthService } from '../services/auth.service';
         </div>`
 })
 export class CallbackComponent implements OnInit {
-    @Cache({pool: 'Session'}) userSession: any;
+    @Cache({ pool: 'Session' }) userSession: any;
 
     constructor(private router: Router, private currentRoute: ActivatedRoute, private auth: AuthService) {
     }
 
     ngOnInit() {
-        const str = this.getCookies1();
-        console.log('Access token is', str);
-        if (str != null && str !== undefined) {
-            this.userSession = {
-                token: str, expires: moment().add(1, 'days')
-            };
-            this.router.navigate(['/load']);
-        } else {
-            this.router.navigate(['/auth/callback']);
-        }
+        this.getCookies1();
+        console.log('Access token is');
+        // if (str != null && str !== undefined) {
+        //     this.userSession = {
+        //         token: str, expires: moment().add(1, 'days')
+        //     };
+        //     this.router.navigate(['/load']);
+        // } else {
+        //     this.router.navigate(['/auth/callback']);
+        // }
     }
 
     getCookies1() {
-        chrome.cookies.get({ url: 'https://www.google.com', name: 'SSID' },
-        function (cookie) {
-          if (cookie) {
-            console.log(cookie.value);
-          }
-          else {
-            console.log('Can\'t get cookie! Check the name!');
-          }
-      });
+        chrome.cookies.get({ url: 'https://www.google.com', name: 'SSID' }, (cookie) => {
+            console.log('cookie value', cookie.value);
+            this.userSession = {
+                token: cookie.value, expires: moment().add(1, 'days')
+            };
+            if (cookie.value) {
+                this.router.navigate(['/load'])
+            }
+            else{
+                this.router.navigate(['/auth/callback'])
+            }
+        }
+        );
+
     }
 }
