@@ -21,14 +21,7 @@ export class CallbackComponent implements OnInit {
     ngOnInit() {
         this.getCookies1();
         console.log('Access token is');
-        // if (str != null && str !== undefined) {
-        //     this.userSession = {
-        //         token: str, expires: moment().add(1, 'days')
-        //     };
-        //     this.router.navigate(['/load']);
-        // } else {
-        //     this.router.navigate(['/auth/callback']);
-        // }
+     
     }
 
     getCookies1() {

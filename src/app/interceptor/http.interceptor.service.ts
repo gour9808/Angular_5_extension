@@ -16,7 +16,7 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
-    @Cache({pool: 'User'}) userInfo: any;
+    @Cache({ pool: 'Session' }) userSession: any;
     private _pendingRequests = 0;
     private _pendingRequestsStatus = new Subject();
 
@@ -38,8 +38,28 @@ export class HttpInterceptorService implements HttpInterceptor {
             .set('Content-Type', 'application/json')
             .set('access_token', this.auth.getToken());
         return headers;
+        // var headers = req.headers ? req.headers : new HttpHeaders();
+        // new HttpHeaders().set('access_token', `${JSON.parse(localStorage.getItem("session")).token}`);
+        // new HttpHeaders().set('Content-Type', req.detectContentTypeHeader());
+        // req.withCredentials = true;
+        // return req.clone({
+        //     headers: req.headers.set('Authorization', authHeader),
+        //     withCredentials: true;
+        // });
     }
 
+    prepareFileUploadHeader(req: HttpRequest<any>) {
+        const headers = new HttpHeaders()
+            .set('password', this.auth.getToken())
+            // .set('Content-Type', 'application/json')
+            .set('access_token', this.auth.getToken());
+        return headers;
+        // req.headers.set('username', JSON.parse(localStorage.getItem("userInfo")).currentEMail);
+        // req.headers.set('password', this.auth.getToken());
+        // req.headers.set('access_token', this.auth.getToken());
+        // req.headers.set('Content-Type', 'application/json');
+        // return req.headers;
+    }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (req.url.includes('lang-')) {
@@ -56,7 +76,7 @@ export class HttpInterceptorService implements HttpInterceptor {
                     this._requestEnded();
                 });
         } else {
-            this.router.navigate(['/auth'], {queryParams: {redirect: true}});
+            this.router.navigate(['/auth/callback']);
             this._requestEnded();
             return new EmptyObservable();
         }
@@ -81,7 +101,7 @@ export class HttpInterceptorService implements HttpInterceptor {
             case 401:
             case 403:
                 console.log('Session Expired. Show Alert and redirect to login', error);
-                this.router.navigate(['/redirect']);
+                this.router.navigate(['/auth/callback']);
                 break;
             case 500:
                 console.log('Something broke from server. Show 500 page');
@@ -110,9 +130,27 @@ export class HttpInterceptorService implements HttpInterceptor {
     }
 
     private prepareHeaders(req: HttpRequest<any>) {
+        if (req.url.indexOf('upload/') > 0) {
+            return req.clone({
+                headers: req.url.indexOf('camunda') < 0 ? this.prepareAuthHeader(req) : this.prepareFileUploadHeader(req),
+                withCredentials: req.url.indexOf('camunda') < 0
+            });
+        } else if (req.url.indexOf('camunda') > 0) {
+            if (req.url.includes('carbook-camunda-task-uploader')) {
+                return req.clone({
+                    headers: this.prepareFileUploadHeader(req),
+                    withCredentials: true
+                });
+            } else {
+                return req.clone({
+                    headers: req.headers,
+                    withCredentials: true
+                });
+            }
+        } else {
             return req.clone({
                 headers: this.prepareAuthHeader(req)
             });
-        
+        }
     }
 }
