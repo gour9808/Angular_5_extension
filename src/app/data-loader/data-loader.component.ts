@@ -10,7 +10,8 @@ import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
   templateUrl: './data-loader.component.html',
   styleUrls: ['./data-loader.component.scss']
 })
-export class DataLoaderComponent implements OnInit {
+@AutoUnsubscribe()
+export class DataLoaderComponent implements OnInit, OnDestroy {
 
   times = [{ odd: true }, { odd: false }, { odd: true }, { odd: false }];
   @Cache({ pool: 'Session' }) userSession: any;
@@ -19,23 +20,29 @@ export class DataLoaderComponent implements OnInit {
 
     console.log('Init Data Loader');
     console.log("token is on data loader", this.userSession.token);
-
-    this.fetchSession();
-
+    if (this.userSession.token) {
+      console.log("hii");
+      
+      this.router.navigate(['/home'])
+      console.log("bye");
+      
+    } else {
+      this.router.navigate(['/auth/callback'])
+    }
   }
 
   ngOnInit() {
+   // this.fetchSession();
+  }
+
+  ngOnDestroy() {
+    console.log("destroy called");
 
   }
+
   fetchSession() {
     console.log('go to route');
-    if (this.userSession.token) {
-      console.log(this.current);
-      this.router.navigate(['/home'])
-    }
-    else{
-      this.router.navigate(['/auth/callback'])
-    }
+  
 
   }
 

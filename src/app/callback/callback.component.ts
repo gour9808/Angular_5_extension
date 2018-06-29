@@ -20,20 +20,22 @@ export class CallbackComponent implements OnInit {
 
     ngOnInit() {
         this.getCookies1();
-        console.log('Access token is');
-     
+        console.log('Access token is', this.userSession);
+
     }
 
     getCookies1() {
         chrome.cookies.get({ url: 'https://www.google.com', name: 'SSID' }, (cookie) => {
             console.log('cookie value', cookie.value);
-            this.userSession = {
-                token: cookie.value, expires: moment().add(1, 'days')
-            };
             if (cookie.value) {
+                this.userSession = {
+                    token: cookie.value, expires: moment().add(1, 'days')
+                };
+                console.log("get Cookies", this.userSession);
+
                 this.router.navigate(['/load'])
             }
-            else{
+            else {
                 this.router.navigate(['/auth/callback'])
             }
         }

@@ -21,7 +21,6 @@ export class AuthService {
         }
         return false;
     }
-
     public getToken() {
         return this.userSession.token ? this.userSession.token : false;
     }

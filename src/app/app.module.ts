@@ -26,6 +26,7 @@ import { DataLoaderComponent } from './data-loader/data-loader.component';
 import { OAuthGuard } from './services/oauth-guard.service';
 import { CallbackComponent } from './callback/callback.component';
 import { HttpInterceptorService } from './interceptor/http.interceptor.service';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -53,11 +54,12 @@ import { HttpInterceptorService } from './interceptor/http.interceptor.service';
 
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorService,
-      multi: true
-  },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpInterceptorService,
+    //   multi: true
+    // },
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     ToastMessageService,
     OAuthGuard,
     SlimLoadingBarService,
