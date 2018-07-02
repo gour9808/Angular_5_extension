@@ -21,18 +21,14 @@ export class DataLoaderComponent implements OnInit, OnDestroy {
     console.log('Init Data Loader');
     console.log("token is on data loader", this.userSession.token);
     if (this.userSession.token) {
-      console.log("hii");
-      
       this.router.navigate(['/home'])
-      console.log("bye");
-      
     } else {
       this.router.navigate(['/auth/callback'])
     }
   }
 
   ngOnInit() {
-   // this.fetchSession();
+    // this.fetchSession();
   }
 
   ngOnDestroy() {
@@ -42,7 +38,7 @@ export class DataLoaderComponent implements OnInit, OnDestroy {
 
   fetchSession() {
     console.log('go to route');
-  
+
 
   }
 
