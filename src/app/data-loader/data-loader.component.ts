@@ -28,7 +28,6 @@ export class DataLoaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.fetchSession();
   }
 
   ngOnDestroy() {
