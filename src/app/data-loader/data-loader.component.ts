@@ -34,12 +34,6 @@ export class DataLoaderComponent implements OnInit, OnDestroy {
     console.log("destroy called");
 
   }
-
-  fetchSession() {
-    console.log('go to route');
-
-
-  }
-
+  
 }
 
