@@ -9,8 +9,6 @@ import { SlimLoadingBarModule, SlimLoadingBarService } from 'ng2-slim-loading-ba
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ContainerComponent } from './container/container.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
@@ -27,6 +25,9 @@ import { OAuthGuard } from './services/oauth-guard.service';
 import { CallbackComponent } from './callback/callback.component';
 import { HttpInterceptorService } from './interceptor/http.interceptor.service';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { ToolbarComponent } from './layout/toolbar/toolbar.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { TabbarComponent } from './layout/tabbar/tabbar.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     SplashLoaderComponent,
     DataLoaderComponent,
     CallbackComponent,
+    TabbarComponent,
   ],
   imports: [
     BrowserAnimationsModule,
