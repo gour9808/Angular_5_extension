@@ -27,7 +27,7 @@ import { HttpInterceptorService } from './interceptor/http.interceptor.service';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { TabbarComponent } from './layout/tabbar/tabbar.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +39,6 @@ import { TabbarComponent } from './layout/tabbar/tabbar.component';
     SplashLoaderComponent,
     DataLoaderComponent,
     CallbackComponent,
-    TabbarComponent,
   ],
   imports: [
     BrowserAnimationsModule,

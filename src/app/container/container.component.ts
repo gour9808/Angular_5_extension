@@ -34,7 +34,7 @@ export class ContainerComponent implements OnInit {
   ];
 
   constructor(private router: Router, private currentRoute: ActivatedRoute) {
-   
+
   }
 
   ngOnInit() {

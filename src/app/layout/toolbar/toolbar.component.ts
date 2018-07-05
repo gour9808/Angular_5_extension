@@ -1,6 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import * as _ from 'lodash';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,24 +7,15 @@ import * as _ from 'lodash';
   
 })
 export class ToolbarComponent implements OnInit {
+  @Input() menu: Array<Object>;
 
-  @Input() title: String;
-  @Output() toggleSidenav = new EventEmitter<any>();
-  @ViewChild('popOutButton') elementView: ElementRef;
-  showPopout: boolean = false;
-  showProfile: boolean = false;
-
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-    console.log("Init Toolbar");
+    console.log("Init toolbar");
+    console.log(this.menu);
+
   }
 
-  toggle() {
-    this.toggleSidenav.emit();
-  }
 
-  togglePopout() {
-    this.showPopout = !this.showPopout;
-  }
 }
